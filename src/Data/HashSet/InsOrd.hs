@@ -175,7 +175,7 @@ type instance Optics.IxValue (InsOrdHashSet a) = ()
 
 instance (Eq k, Hashable k) => Optics.Ixed (InsOrdHashSet k) where
     ix k = Optics.atraversalVL $ \point f (InsOrdHashSet i m) ->
-      InsOrdHashSet i <$> Optics.toAtraversalVL (Optics.ix k) point (\j -> j <$ f ()) m
+      InsOrdHashSet i <$> Optics.atraverseOf (Optics.ix k) point (\j -> j <$ f ()) m
     {-# INLINE ix #-}
 
 instance (Eq k, Hashable k) => Optics.At (InsOrdHashSet k) where
